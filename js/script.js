@@ -1,10 +1,14 @@
+// Global variables
 const nameField = document.getElementById("name");
 const otherJobRole = document.getElementById("other-job-role");
 const jobRole = document.getElementById("title");
 const tshirtColor = document.getElementById("color");
 const tshirtDesign = document.getElementById("design");
+const activities = document.getElementById("activities");
+let activitiesCost = document.getElementById("activities-cost");
+let totalActivityCost = 0;
 
-//Focus on "Name" field, ready for user input
+// Focus on "Name" field, ready for user input
 nameField.focus();
 
 // Hide/Disable necessary fields on start-up
@@ -20,7 +24,7 @@ jobRole.addEventListener("change", (e) => {
     }
 });
 
-// Liste for change and display appropriate t-shirt design choices
+// Listen for change and display appropriate t-shirt design choices
 tshirtDesign.addEventListener("change", (e) => {
     tshirtColor.disabled = false;
 
@@ -36,5 +40,18 @@ tshirtDesign.addEventListener("change", (e) => {
             tshirtColor.children[i].hidden = true;
             optionDataTheme.selected = false;
         }
+    }
+});
+
+// Listen for change and update sum of cost
+activities.addEventListener("change", (e) => {
+    let optionCost = parseInt(e.target.getAttribute("data-cost"));
+
+    if (e.target.checked) {
+        totalActivityCost += optionCost;
+        activitiesCost.innerHTML = `Total: $${totalActivityCost}`;
+    } else {
+        totalActivityCost -= optionCost;
+        activitiesCost.innerHTML = `Total: $${totalActivityCost}`;
     }
 });
