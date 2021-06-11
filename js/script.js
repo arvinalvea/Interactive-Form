@@ -7,20 +7,26 @@ const tshirtDesign = document.getElementById("design");
 const activities = document.getElementById("activities");
 let activitiesCost = document.getElementById("activities-cost");
 let totalActivityCost = 0;
+const paymentField = document.getElementById("payment");
+const creditCard = document.getElementById("credit-card");
+const paypal = document.getElementById("paypal");
+const bitcoin = document.getElementById("bitcoin");
 
 // Focus on "Name" field, ready for user input
 nameField.focus();
 
 // Hide/Disable necessary fields on start-up
-otherJobRole.style.visibility = "hidden";
+otherJobRole.style.display = "none";
 tshirtColor.disabled = true;
+paypal.style.display = "none";
+bitcoin.style.display = "none";
 
 // Listen for change and show "Other Job Role" field if "Other" is selected
 jobRole.addEventListener("change", (e) => {
     if (e.target.value === "other") {
-        otherJobRole.style.visibility = "visible";
+        otherJobRole.style.display = "block";
     } else {
-        otherJobRole.style.visibility = "hidden";
+        otherJobRole.style.display = "none";
     }
 });
 
@@ -53,5 +59,26 @@ activities.addEventListener("change", (e) => {
     } else {
         totalActivityCost -= optionCost;
         activitiesCost.innerHTML = `Total: $${totalActivityCost}`;
+    }
+});
+
+// "Payment Info" Section. Default Credit Card as payment option and show/hide
+// other payment fields as necessary
+
+paymentField.children[1].setAttribute("selected", true);
+
+paymentField.addEventListener("change", (e) => {
+    if (e.target.value === "paypal") {
+        paypal.style.display = "block";
+        creditCard.style.display = "none";
+        bitcoin.style.display = "none";
+    } else if (e.target.value === "bitcoin") {
+        bitcoin.style.display = "block";
+        creditCard.style.display = "none";
+        paypal.style.display = "none";
+    } else if (e.target.value === "credit-card") {
+        creditCard.style.display = "block";
+        paypal.style.display = "none";
+        bitcoin.style.display = "none";
     }
 });
