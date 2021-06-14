@@ -1,5 +1,9 @@
-// Global variables
-const nameField = document.getElementById("name");
+/**
+ *
+ * GLOBAL VARIABLES
+ *
+ */
+const name = document.getElementById("name");
 const otherJobRole = document.getElementById("other-job-role");
 const jobRole = document.getElementById("title");
 const tshirtColor = document.getElementById("color");
@@ -11,9 +15,30 @@ const paymentField = document.getElementById("payment");
 const creditCard = document.getElementById("credit-card");
 const paypal = document.getElementById("paypal");
 const bitcoin = document.getElementById("bitcoin");
+const email = document.getElementById("email");
+const creditCardNumber = document.getElementById("cc-num");
+const zipCode = document.getElementById("zip");
+const cvv = document.getElementById("cvv");
+const form = document.getElementsByTagName("form");
+
+/**
+ *
+ * VALIDATORS
+ *
+ */
+
+// Can only contain letters a-z or A-Z
+function isValidName(name) {
+    return /[A-Za-z]+/.test(name);
+}
+
+// Can only contain letters a-z or A-Z
+function isValidName(name) {
+    return /[A-Za-z]+/.test(name);
+}
 
 // Focus on "Name" field, ready for user input
-nameField.focus();
+name.focus();
 
 // Hide/Disable necessary fields on start-up
 otherJobRole.style.display = "none";
@@ -80,5 +105,17 @@ paymentField.addEventListener("change", (e) => {
         creditCard.style.display = "block";
         paypal.style.display = "none";
         bitcoin.style.display = "none";
+    }
+});
+
+// Form validation
+
+form[0].addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let nameField = name.value;
+
+    if (!isValidName(nameField)) {
+        e.preventDefault();
     }
 });
