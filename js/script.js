@@ -32,9 +32,9 @@ function isValidName(name) {
     return /[A-Za-z]+/.test(name);
 }
 
-// Can only contain letters a-z or A-Z
-function isValidName(name) {
-    return /[A-Za-z]+/.test(name);
+// Must be a valid email address
+function isValidEmail(email) {
+    return /^[^@]+@[^@.]+.com/.test(email);
 }
 
 // Focus on "Name" field, ready for user input
@@ -111,11 +111,14 @@ paymentField.addEventListener("change", (e) => {
 // Form validation
 
 form[0].addEventListener("submit", (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     let nameField = name.value;
+    let emailField = email.value;
 
-    if (!isValidName(nameField)) {
+    console.log(isValidEmail(emailField));
+
+    if (!isValidName(nameField) || !isValidEmail(emailField)) {
         e.preventDefault();
     }
 });
