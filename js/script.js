@@ -20,11 +20,6 @@ const creditCardNumber = document.getElementById("cc-num");
 const zipCode = document.getElementById("zip");
 const cvv = document.getElementById("cvv");
 const form = document.getElementsByTagName("form");
-/**
- *
- *
- *
- */
 
 /**
  *
@@ -41,10 +36,32 @@ function isValidEmail(email) {
     return /^[^@]+@[^@.]+.com/.test(email);
 }
 
-// If and only if credit card is the selected payment method
-// function creditCardSelectedAndValid(paymentField) {
-//     if(paymentField.value)
-// }
+// Must be a valid credit card number
+function isValidCCNum(paymentField) {
+    if (paymentField.value === "credit-card") {
+        return /\d{13,16}/.test(creditCardNumber.value);
+    } else {
+        return false;
+    }
+}
+
+// Must be a valid zip code
+function isValidZipcode(paymentField) {
+    if (paymentField.value === "credit-card") {
+        return /\d{5}/.test(zipCode.value);
+    } else {
+        return false;
+    }
+}
+
+// Must be a valid CVV code
+function isValidCVV(paymentField) {
+    if (paymentField.value === "credit-card") {
+        return /\d{3}/.test(cvv.value);
+    } else {
+        return false;
+    }
+}
 /**
  *
  *
@@ -125,8 +142,6 @@ paymentField.addEventListener("change", (e) => {
 // Form validation
 
 form[0].addEventListener("submit", (e) => {
-    // e.preventDefault();
-
     let nameField = name.value;
     let emailField = email.value;
     let activitiesField = totalActivityCost;
@@ -134,7 +149,10 @@ form[0].addEventListener("submit", (e) => {
     if (
         !isValidName(nameField) ||
         !isValidEmail(emailField) ||
-        activitiesField === 0
+        activitiesField === 0 ||
+        !isValidCCNum(paymentField) ||
+        !isValidZipcode(paymentField) ||
+        !isValidCVV(paymentField)
     ) {
         e.preventDefault();
     }
