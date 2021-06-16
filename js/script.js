@@ -20,13 +20,17 @@ const creditCardNumber = document.getElementById("cc-num");
 const zipCode = document.getElementById("zip");
 const cvv = document.getElementById("cvv");
 const form = document.getElementsByTagName("form");
+/**
+ *
+ *
+ *
+ */
 
 /**
  *
  * VALIDATORS
  *
  */
-
 // Can only contain letters a-z or A-Z
 function isValidName(name) {
     return /[A-Za-z]+/.test(name);
@@ -36,6 +40,16 @@ function isValidName(name) {
 function isValidEmail(email) {
     return /^[^@]+@[^@.]+.com/.test(email);
 }
+
+// If and only if credit card is the selected payment method
+// function creditCardSelectedAndValid(paymentField) {
+//     if(paymentField.value)
+// }
+/**
+ *
+ *
+ *
+ */
 
 // Focus on "Name" field, ready for user input
 name.focus();
@@ -115,10 +129,13 @@ form[0].addEventListener("submit", (e) => {
 
     let nameField = name.value;
     let emailField = email.value;
+    let activitiesField = totalActivityCost;
 
-    console.log(isValidEmail(emailField));
-
-    if (!isValidName(nameField) || !isValidEmail(emailField)) {
+    if (
+        !isValidName(nameField) ||
+        !isValidEmail(emailField) ||
+        activitiesField === 0
+    ) {
         e.preventDefault();
     }
 });
