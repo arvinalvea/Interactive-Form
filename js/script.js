@@ -3,6 +3,7 @@
  * GLOBAL VARIABLES
  *
  */
+
 const name = document.getElementById("name");
 const otherJobRole = document.getElementById("other-job-role");
 const jobRole = document.getElementById("title");
@@ -20,12 +21,16 @@ const creditCardNumber = document.getElementById("cc-num");
 const zipCode = document.getElementById("zip");
 const cvv = document.getElementById("cvv");
 const form = document.getElementsByTagName("form");
+const activityInputs = document
+    .getElementById("activities-box")
+    .getElementsByTagName("input");
 
 /**
  *
  * VALIDATORS
  *
  */
+
 // Can only contain letters a-z or A-Z
 function isValidName(name) {
     return /[A-Za-z]+/.test(name);
@@ -62,11 +67,6 @@ function isValidCVV(paymentField) {
         return false;
     }
 }
-/**
- *
- *
- *
- */
 
 // Focus on "Name" field, ready for user input
 name.focus();
@@ -157,3 +157,18 @@ form[0].addEventListener("submit", (e) => {
         e.preventDefault();
     }
 });
+
+// Accessibility
+
+// Add styles for checkboxes in "Register for Activities"
+// when in focus
+
+for (let i = 0; i < activityInputs.length; i++) {
+    console.log(activityInputs[i]);
+    activityInputs[i].addEventListener("focus", (e) => {
+        activityInputs[i].parentElement.classList.add("focus");
+    });
+    activityInputs[i].addEventListener("blur", (e) => {
+        activityInputs[i].parentElement.classList.remove("focus");
+    });
+}
