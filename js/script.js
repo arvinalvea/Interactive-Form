@@ -36,7 +36,6 @@ function isValidName(nameValue) {
     let regEx = /[A-Za-z]+/.test(nameValue);
 
     if (regEx === false) {
-        console.log(name.parentElement);
         name.parentElement.classList.add("not-valid");
         name.parentElement.classList.remove("valid");
         name.parentElement.lastElementChild.style.display = "block";
