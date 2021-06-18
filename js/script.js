@@ -32,8 +32,20 @@ const activityInputs = document
  */
 
 // Can only contain letters a-z or A-Z
-function isValidName(name) {
-    return /[A-Za-z]+/.test(name);
+function isValidName(nameValue) {
+    let regEx = /[A-Za-z]+/.test(nameValue);
+
+    if (regEx === false) {
+        console.log(name.parentElement);
+        name.parentElement.classList.add("not-valid");
+        name.parentElement.classList.remove("valid");
+        name.parentElement.lastElementChild.style.display = "block";
+        return regEx;
+    } else {
+        name.parentElement.classList.add("valid");
+        name.parentElement.classList.remove("not-valid");
+        name.parentElement.lastElementChild.style.display = "none";
+    }
 }
 
 // Must be a valid email address
@@ -158,13 +170,10 @@ form[0].addEventListener("submit", (e) => {
     }
 });
 
-// Accessibility
-
 // Add styles for checkboxes in "Register for Activities"
 // when in focus
 
 for (let i = 0; i < activityInputs.length; i++) {
-    console.log(activityInputs[i]);
     activityInputs[i].addEventListener("focus", (e) => {
         activityInputs[i].parentElement.classList.add("focus");
     });
