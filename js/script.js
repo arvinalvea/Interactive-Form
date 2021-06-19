@@ -108,10 +108,12 @@ tshirtDesign.addEventListener("change", (e) => {
 
         if (e.target.value === optionDataTheme) {
             tshirtColor.children[i].hidden = false;
-            optionDataTheme.selected = true;
+            // optionDataTheme.selected = true;
+            tshirtColor.children[4].selected = true;
         } else {
             tshirtColor.children[i].hidden = true;
-            optionDataTheme.selected = false;
+            // optionDataTheme.selected = false;
+            tshirtColor.children[1].selected = true;
         }
     }
 });
