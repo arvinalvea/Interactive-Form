@@ -68,24 +68,91 @@ function isValidEmail(emailValue) {
 
 // Must be a valid credit card number
 function isValidCCNum(paymentField) {
-    // if (paymentField.value === "credit-card") {
     return /^[1-9][0-9]{12,15}$/.test(creditCardNumber.value);
-    //}
 }
 
 // Must be a valid zip code
 function isValidZipcode(paymentField) {
-    //if (paymentField.value === "credit-card") {
     return /^[1-9][0-9]{4}$/.test(zipCode.value);
-    //}
 }
 
 // Must be a valid CVV code
 function isValidCVV(paymentField) {
-    //if (paymentField.value === "credit-card") {
     return /^[1-9][0-9]{2}$/.test(cvv.value);
-    //}
 }
+
+// Function to toggle alert boxes for validation
+
+function toggleAlertBoxes() {
+    let nameField = name.value;
+    let emailField = email.value;
+    let activitiesField = totalActivityCost;
+
+    if (isValidName(nameField) === false) {
+        name.parentElement.classList.add("not-valid");
+        name.parentElement.classList.remove("valid");
+        name.parentElement.lastElementChild.style.display = "block";
+    } else {
+        name.parentElement.classList.add("valid");
+        name.parentElement.classList.remove("not-valid");
+        name.parentElement.lastElementChild.style.display = "none";
+    }
+    if (isValidEmail(emailField) === false) {
+        email.parentElement.classList.add("not-valid");
+        email.parentElement.classList.remove("valid");
+        email.parentElement.lastElementChild.style.display = "block";
+    } else {
+        email.parentElement.classList.add("valid");
+        email.parentElement.classList.remove("not-valid");
+        email.parentElement.lastElementChild.style.display = "none";
+    }
+    if (activitiesField === 0) {
+        activities.classList.add("not-valid");
+        activities.classList.remove("valid");
+        activities.lastElementChild.style.display = "block";
+    } else {
+        activities.classList.add("valid");
+        activities.classList.remove("not-valid");
+        activities.lastElementChild.style.display = "none";
+    }
+    if (paymentField.value === "credit-card") {
+        if (isValidCCNum() === false) {
+            creditCardNumber.parentElement.classList.add("not-valid");
+            creditCardNumber.parentElement.classList.remove("valid");
+            creditCardNumber.parentElement.lastElementChild.style.display =
+                "block";
+        } else {
+            creditCardNumber.parentElement.classList.add("valid");
+            creditCardNumber.parentElement.classList.remove("not-valid");
+            creditCardNumber.parentElement.lastElementChild.style.display =
+                "none";
+        }
+        if (isValidZipcode() === false) {
+            zipCode.parentElement.classList.add("not-valid");
+            zipCode.parentElement.classList.remove("valid");
+            zipCode.parentElement.lastElementChild.style.display = "block";
+        } else {
+            zipCode.parentElement.classList.add("valid");
+            zipCode.parentElement.classList.remove("not-valid");
+            zipCode.parentElement.lastElementChild.style.display = "none";
+        }
+        if (isValidCVV() === false) {
+            cvv.parentElement.classList.add("not-valid");
+            cvv.parentElement.classList.remove("valid");
+            cvv.parentElement.lastElementChild.style.display = "block";
+        } else {
+            cvv.parentElement.classList.add("valid");
+            cvv.parentElement.classList.remove("not-valid");
+            cvv.parentElement.lastElementChild.style.display = "none";
+        }
+    }
+}
+
+/**
+ *
+ * START-UP
+ *
+ */
 
 // Focus on "Name" field, ready for user input
 name.focus();
@@ -95,6 +162,12 @@ otherJobRole.style.display = "none";
 tshirtColor.disabled = true;
 paypal.style.display = "none";
 bitcoin.style.display = "none";
+
+/**
+ *
+ * EVENT LISTENERS
+ *
+ */
 
 // Listen for change and show "Other Job Role" field if "Other" is selected
 jobRole.addEventListener("change", (e) => {
@@ -160,7 +233,11 @@ paymentField.addEventListener("change", (e) => {
     }
 });
 
-// Form validation
+/**
+ *
+ * FORM VALIDATION
+ *
+ */
 
 form[0].addEventListener("submit", (e) => {
     let nameField = name.value;
@@ -175,6 +252,7 @@ form[0].addEventListener("submit", (e) => {
         (paymentField.value === "credit-card" && isValidZipcode() === false) ||
         (paymentField.value === "credit-card" && isValidCVV() === false)
     ) {
+        toggleAlertBoxes();
         e.preventDefault();
     }
 });
