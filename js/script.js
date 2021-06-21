@@ -49,8 +49,21 @@ function isValidName(nameValue) {
 }
 
 // Must be a valid email address
-function isValidEmail(email) {
-    return /^[^@]+@[^@.]+.com/.test(email);
+function isValidEmail(emailValue) {
+    let regEx = /^[^@]+@[^@.]+.com/.test(emailValue);
+    console.log(name.parentElement);
+
+    if (regEx === false) {
+        email.parentElement.classList.add("not-valid");
+        email.parentElement.classList.remove("valid");
+        email.parentElement.lastElementChild.style.display = "block";
+        return regEx;
+    } else {
+        email.parentElement.classList.add("valid");
+        email.parentElement.classList.remove("not-valid");
+        email.parentElement.lastElementChild.style.display = "none";
+        return true;
+    }
 }
 
 // Must be a valid credit card number
