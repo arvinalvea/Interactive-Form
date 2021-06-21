@@ -33,37 +33,12 @@ const activityInputs = document
 
 // Can only contain letters a-z or A-Z
 function isValidName(nameValue) {
-    let regEx = /[A-Za-z]+/.test(nameValue);
-
-    if (regEx === false) {
-        name.parentElement.classList.add("not-valid");
-        name.parentElement.classList.remove("valid");
-        name.parentElement.lastElementChild.style.display = "block";
-        return regEx;
-    } else {
-        name.parentElement.classList.add("valid");
-        name.parentElement.classList.remove("not-valid");
-        name.parentElement.lastElementChild.style.display = "none";
-        return true;
-    }
+    return /[A-Za-z]+/.test(nameValue);
 }
 
 // Must be a valid email address
 function isValidEmail(emailValue) {
-    let regEx = /^[^@]+@[^@.]+.com/.test(emailValue);
-    console.log(name.parentElement);
-
-    if (regEx === false) {
-        email.parentElement.classList.add("not-valid");
-        email.parentElement.classList.remove("valid");
-        email.parentElement.lastElementChild.style.display = "block";
-        return regEx;
-    } else {
-        email.parentElement.classList.add("valid");
-        email.parentElement.classList.remove("not-valid");
-        email.parentElement.lastElementChild.style.display = "none";
-        return true;
-    }
+    return /^[^@]+@[^@.]+.com/.test(emailValue);
 }
 
 // Must be a valid credit card number
