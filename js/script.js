@@ -44,6 +44,7 @@ function isValidName(nameValue) {
         name.parentElement.classList.add("valid");
         name.parentElement.classList.remove("not-valid");
         name.parentElement.lastElementChild.style.display = "none";
+        return true;
     }
 }
 
@@ -54,29 +55,23 @@ function isValidEmail(email) {
 
 // Must be a valid credit card number
 function isValidCCNum(paymentField) {
-    if (paymentField.value === "credit-card") {
-        return /\d{13,16}/.test(creditCardNumber.value);
-    } else {
-        return false;
-    }
+    // if (paymentField.value === "credit-card") {
+    return /^[1-9][0-9]{12,15}$/.test(creditCardNumber.value);
+    //}
 }
 
 // Must be a valid zip code
 function isValidZipcode(paymentField) {
-    if (paymentField.value === "credit-card") {
-        return /\d{5}/.test(zipCode.value);
-    } else {
-        return false;
-    }
+    //if (paymentField.value === "credit-card") {
+    return /^[1-9][0-9]{4}$/.test(zipCode.value);
+    //}
 }
 
 // Must be a valid CVV code
 function isValidCVV(paymentField) {
-    if (paymentField.value === "credit-card") {
-        return /\d{3}/.test(cvv.value);
-    } else {
-        return false;
-    }
+    //if (paymentField.value === "credit-card") {
+    return /^[1-9][0-9]{2}$/.test(cvv.value);
+    //}
 }
 
 // Focus on "Name" field, ready for user input
@@ -160,12 +155,12 @@ form[0].addEventListener("submit", (e) => {
     let activitiesField = totalActivityCost;
 
     if (
-        !isValidName(nameField) ||
-        !isValidEmail(emailField) ||
+        isValidName(nameField) === false ||
+        isValidEmail(emailField) === false ||
         activitiesField === 0 ||
-        !isValidCCNum(paymentField) ||
-        !isValidZipcode(paymentField) ||
-        !isValidCVV(paymentField)
+        (paymentField.value === "credit-card" && isValidCCNum() === false) ||
+        (paymentField.value === "credit-card" && isValidZipcode() === false) ||
+        (paymentField.value === "credit-card" && isValidCVV() === false)
     ) {
         e.preventDefault();
     }
